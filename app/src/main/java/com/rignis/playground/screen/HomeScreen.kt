@@ -1,12 +1,16 @@
 package com.rignis.playground.screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -63,13 +67,21 @@ private fun WithDataScreen(modifier: Modifier, state: MainScreenState.HasData) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.TopCenter))
             }
         }
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
             items(
                 state.data.size,
                 key = { index -> state.data[index].id },
                 contentType = { 1 }) { index ->
                 val item = state.data[index]
-                Card(modifier = Modifier.fillMaxWidth()) {
+                Card(modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+
+                ) {
                     Column(modifier = Modifier.fillMaxWidth()) {
                         Text(item.title)
                         Spacer(modifier = Modifier.height(12.dp))
@@ -78,7 +90,7 @@ private fun WithDataScreen(modifier: Modifier, state: MainScreenState.HasData) {
                         AsyncImage(
                             item.image,
                             contentDescription = "Content Image",
-                            modifier = Modifier.aspectRatio(0.5f)
+                            modifier = Modifier.aspectRatio(2f)
                         )
                     }
                 }
