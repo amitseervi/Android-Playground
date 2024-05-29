@@ -12,6 +12,7 @@ composeBom = "2024.05.00"
 android-youtubeExtractor = "v2.1.0"
 glide = "4.16.0"
 ksp = "1.9.22-1.0.17"
+multidex = "2.0.1"
 pagingRuntimeKtx = "3.3.0"
 retrofit = "2.9.0"
 room = "2.6.1"
@@ -27,6 +28,7 @@ kotlin-json="1.6.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingRuntimeKtx" }
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
