@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.Until
+import junit.framework.TestCase.fail
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -45,12 +46,18 @@ class ExampleStartupBenchmark {
         packageName = "com.rignis.playground",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.COLD
+        startupMode = StartupMode.COLD,
+        setupBlock = {
+            pressHome()
+            startActivityAndWait()
+        }
     ) {
-        pressHome()
-        startActivityAndWait()
-        device.wait(Until.hasObject(By.res(packageName,"feed_list")), 5_000)
-        val feedList = device.findObject(By.res(packageName,"feed_list"))
+        val feedListSelector = By.res(packageName,"feed_list")
+        if(!device.wait(Until.hasObject(feedListSelector), 5_000)){
+            fail("Could not find feedList in time")
+        }
+        val feedList = device.findObject(feedListSelector)
         feedList.fling(Direction.DOWN)
+        device.waitForIdle()
     }
 }
