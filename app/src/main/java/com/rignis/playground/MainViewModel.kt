@@ -32,7 +32,6 @@ class MainViewModel @Inject constructor(private val repository: FeedRepository) 
                     is MainScreenState.NoData -> it.copy(loading = true, error = null)
                 }
             }
-            delay(3000)
             val data = repository.getData(0)
             _state.emit(
                 if (data.isEmpty()) {

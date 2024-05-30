@@ -1,5 +1,6 @@
 package com.rignis.playground.screen
 
+import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -61,6 +63,9 @@ private fun NoDataScreen(modifier: Modifier, state: MainScreenState.NoData) {
 
 @Composable
 private fun WithDataScreen(modifier: Modifier, state: MainScreenState.HasData) {
+    ReportDrawnWhen {
+        state.data.isNotEmpty()
+    }
     Box(modifier = modifier) {
         if (state.loading) {
             Box(modifier) {
@@ -69,6 +74,7 @@ private fun WithDataScreen(modifier: Modifier, state: MainScreenState.HasData) {
         }
         LazyColumn(modifier = Modifier
             .fillMaxSize()
+            .testTag("feed_list")
             .padding(horizontal = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
