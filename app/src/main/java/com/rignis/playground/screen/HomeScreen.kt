@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -34,7 +35,9 @@ import com.rignis.playground.state.MainScreenState
 fun HomeScreen(modifier: Modifier) {
     val viewModel: MainViewModel = hiltViewModel<MainViewModel>()
     val state by viewModel.state.collectAsState()
-    HomeScreenContent(modifier, state)
+    Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
+        HomeScreenContent(modifier.padding(padding), state)
+    }
 }
 
 @Composable
@@ -74,9 +77,9 @@ private fun WithDataScreen(modifier: Modifier, state: MainScreenState.HasData) {
         }
         LazyColumn(modifier = Modifier
             .fillMaxSize()
-            .testTag("feed_list")
-            .padding(horizontal = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            .testTag("feed_list"),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 20.dp)
         ) {
             items(
                 state.data.size,
@@ -86,9 +89,12 @@ private fun WithDataScreen(modifier: Modifier, state: MainScreenState.HasData) {
                 Card(modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-
                 ) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp)
+                    ) {
                         Text(item.title)
                         Spacer(modifier = Modifier.height(12.dp))
                         Text(item.description)

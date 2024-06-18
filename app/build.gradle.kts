@@ -98,7 +98,10 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.11.0")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation(libs.coil.compose)
+    // https://mvnrepository.com/artifact/androidx.navigation/navigation-compose
+    implementation("androidx.navigation:navigation-compose:2.8.0-beta03")
+
 
 }
