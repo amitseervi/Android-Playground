@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.google.service)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -76,4 +77,9 @@ dependencies {
     androidTestImplementation(libs.androidx.work.testing)
     implementation(libs.timber)
     implementation(libs.androidx.startup.runtime)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(project(":data:authentication"))
+    implementation(project(":feature:authentication"))
 }
