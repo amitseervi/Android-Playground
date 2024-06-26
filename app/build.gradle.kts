@@ -71,4 +71,9 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.work.multiprocess)
+    androidTestImplementation(libs.androidx.work.testing)
+    implementation(libs.timber)
+    implementation(libs.androidx.startup.runtime)
 }
