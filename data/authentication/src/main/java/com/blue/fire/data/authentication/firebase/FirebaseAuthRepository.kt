@@ -1,16 +1,30 @@
 package com.blue.fire.data.authentication.firebase
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.blue.fire.authentication.model.User
 import com.blue.fire.authentication.repository.AuthRepository
 import com.google.firebase.Firebase
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.auth
+import javax.inject.Inject
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class FirebaseAuthRepository : AuthRepository {
+class FirebaseAuthRepository @Inject constructor() : AuthRepository {
     private val auth by lazy {
         Firebase.auth
+    }
+
+    private val mFirebaseCurrentUser = MutableLiveData<User>()
+
+    override val currentUser: LiveData<User>
+        get() = mFirebaseCurrentUser
+
+    init {
+        auth.addAuthStateListener {
+            mFirebaseCurrentUser.value = mapFirebaseUserToModel(it.currentUser)
+        }
     }
 
     override suspend fun loginWithEmailAndPassword(email: String, password: String): User {
