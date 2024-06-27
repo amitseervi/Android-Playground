@@ -1,4 +1,4 @@
-package com.blue.fire.app.login
+package com.blue.fire.authentication.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -20,22 +23,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun LoginRoute(navigateToSignup: () -> Unit) {
-    val loginViewModel = hiltViewModel<LoginViewModel>()
-    LoginPage(loginViewModel::onLogin, navigateToSignup)
+fun SignupRoute(navigateUp: () -> Unit) {
+    val signupViewModel = hiltViewModel<SignupViewModel>()
+    SignupPage(signupViewModel::onSignup, navigateUp)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(onLogin: (email: String, password: String) -> Unit, navigateToSignup: () -> Unit) {
+fun SignupPage(
+    onSignup: (user: String, email: String, password: String) -> Unit,
+    navigateUp: () -> Unit
+) {
+    var userName by remember {
+        mutableStateOf("")
+    }
     var emailInput by remember {
         mutableStateOf("")
     }
@@ -44,7 +50,11 @@ fun LoginPage(onLogin: (email: String, password: String) -> Unit, navigateToSign
     }
     Scaffold(modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(title = { Text("Login") })
+            TopAppBar(title = { Text("Signup") }, navigationIcon = {
+                IconButton(navigateUp) {
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                }
+            })
         }) { padding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -53,6 +63,11 @@ fun LoginPage(onLogin: (email: String, password: String) -> Unit, navigateToSign
                 .padding(padding)
                 .fillMaxSize(),
         ) {
+            TextField(
+                userName,
+                onValueChange = { newValue -> userName = newValue },
+                placeholder = { Text("DisplayName") })
+            Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 emailInput,
                 onValueChange = { newValue -> emailInput = newValue },
@@ -64,21 +79,16 @@ fun LoginPage(onLogin: (email: String, password: String) -> Unit, navigateToSign
                 placeholder = { Text("Password") })
             Spacer(modifier = Modifier.height(12.dp))
             Button(onClick = {
-                onLogin(emailInput, passwordInput)
+                onSignup(userName, emailInput, passwordInput)
             }) {
-                Text("Login")
+                Text("Signup")
             }
-            Spacer(modifier = Modifier.height(12.dp))
-            ClickableText(text = AnnotatedString("Create new Account"), style = TextStyle(textDecoration = TextDecoration.Underline)) {
-                navigateToSignup()
-            }
-
         }
     }
 }
 
 @Preview
 @Composable
-private fun LoginPagePreview() {
-    LoginPage({ e, p -> }, {})
+private fun SignupPagePreview() {
+    SignupPage({ u, e, p -> }, {})
 }

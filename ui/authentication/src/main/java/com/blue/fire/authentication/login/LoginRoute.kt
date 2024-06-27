@@ -1,4 +1,4 @@
-package com.blue.fire.app.signup
+package com.blue.fire.authentication.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -6,12 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -23,25 +20,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun SignupRoute(navigateUp: () -> Unit) {
-    val signupViewModel = hiltViewModel<SignupViewModel>()
-    SignupPage(signupViewModel::onSignup, navigateUp)
+fun LoginRoute(navigateToSignup: () -> Unit) {
+    val loginViewModel = hiltViewModel<LoginViewModel>()
+    LoginPage(loginViewModel::onLogin, navigateToSignup)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignupPage(
-    onSignup: (user: String, email: String, password: String) -> Unit,
-    navigateUp: () -> Unit
-) {
-    var userName by remember {
-        mutableStateOf("")
-    }
+fun LoginPage(onLogin: (email: String, password: String) -> Unit, navigateToSignup: () -> Unit) {
     var emailInput by remember {
         mutableStateOf("")
     }
@@ -50,11 +44,7 @@ fun SignupPage(
     }
     Scaffold(modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(title = { Text("Signup") }, navigationIcon = {
-                IconButton(navigateUp) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                }
-            })
+            TopAppBar(title = { Text("Login") })
         }) { padding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,11 +53,6 @@ fun SignupPage(
                 .padding(padding)
                 .fillMaxSize(),
         ) {
-            TextField(
-                userName,
-                onValueChange = { newValue -> userName = newValue },
-                placeholder = { Text("DisplayName") })
-            Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 emailInput,
                 onValueChange = { newValue -> emailInput = newValue },
@@ -79,16 +64,21 @@ fun SignupPage(
                 placeholder = { Text("Password") })
             Spacer(modifier = Modifier.height(12.dp))
             Button(onClick = {
-                onSignup(userName, emailInput, passwordInput)
+                onLogin(emailInput, passwordInput)
             }) {
-                Text("Signup")
+                Text("Login")
             }
+            Spacer(modifier = Modifier.height(12.dp))
+            ClickableText(text = AnnotatedString("Create new Account"), style = TextStyle(textDecoration = TextDecoration.Underline)) {
+                navigateToSignup()
+            }
+
         }
     }
 }
 
 @Preview
 @Composable
-private fun SignupPagePreview() {
-    SignupPage({ u, e, p -> }, {})
+private fun LoginPagePreview() {
+    LoginPage({ e, p -> }, {})
 }

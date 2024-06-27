@@ -9,9 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.blue.fire.app.home.HomeRoute
-import com.blue.fire.app.login.LoginRoute
-import com.blue.fire.app.signup.SignupRoute
+import com.blue.fire.home.HomeRoute
 
 @Composable
 fun AppNavigation(modifier: Modifier) {
@@ -29,13 +27,13 @@ fun AppNavigation(modifier: Modifier) {
     NavHost(navController = navController, startDestination = route, modifier = modifier) {
         navigation(startDestination = "login", route = "auth") {
             composable("login") {
-                LoginRoute(navigateToSignup={
+                com.blue.fire.authentication.login.LoginRoute(navigateToSignup = {
                     navController.navigate("signup")
                 })
             }
 
             composable("signup") {
-                SignupRoute(navigateUp={
+                com.blue.fire.authentication.signup.SignupRoute(navigateUp = {
                     navController.navigateUp()
                 })
             }

@@ -1,4 +1,4 @@
-package com.blue.fire.app.login
+package com.blue.fire.authentication.signup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,10 +8,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
-    fun onLogin(email: String, password: String) {
+class SignupViewModel @Inject constructor(private val authRepository: AuthRepository) :
+    ViewModel() {
+    fun onSignup(name: String, email: String, password: String) {
         viewModelScope.launch {
-            authRepository.loginWithEmailAndPassword(email, password)
+            authRepository.signupWithEmailAndPassword(name, email, password)
         }
     }
 }

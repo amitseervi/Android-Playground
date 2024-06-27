@@ -83,6 +83,8 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.runtime.livedata)
+    implementation(project(":ui:home"))
+    implementation(project(":ui:authentication"))
     implementation(project(":data:authentication"))
     implementation(project(":feature:authentication"))
 }
