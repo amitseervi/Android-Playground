@@ -1,8 +1,8 @@
-package com.blue.fire.home
+package com.blue.fire.home.feed
 
 import androidx.compose.runtime.Composable
 
 @Composable
-fun HomeRoute() {
+fun HomeFeedRoute() {
 
 }

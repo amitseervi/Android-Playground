@@ -1,4 +1,4 @@
-package com.blue.fire.home
+package com.blue.fire.home.feed
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
