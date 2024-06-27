@@ -1,7 +1,10 @@
 package com.blue.fire.app.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -11,7 +14,10 @@ import com.blue.fire.app.login.LoginRoute
 import com.blue.fire.app.signup.SignupRoute
 
 @Composable
-fun AppNavigation(isAuthenticated: Boolean) {
+fun AppNavigation(modifier: Modifier) {
+    val viewModel = hiltViewModel<AuthenticationViewModel>()
+    val currentUser = viewModel.currentUser.observeAsState()
+    val isAuthenticated = currentUser.value != null
     val navController = rememberNavController()
     val route = remember(isAuthenticated) {
         if (isAuthenticated) {
@@ -20,17 +26,21 @@ fun AppNavigation(isAuthenticated: Boolean) {
             "auth"
         }
     }
-    NavHost(navController, "auth") {
-        navigation(startDestination = "login", route = route) {
+    NavHost(navController = navController, startDestination = route, modifier = modifier) {
+        navigation(startDestination = "login", route = "auth") {
             composable("login") {
-                LoginRoute()
+                LoginRoute(navigateToSignup={
+                    navController.navigate("signup")
+                })
             }
 
             composable("signup") {
-                SignupRoute()
+                SignupRoute(navigateUp={
+                    navController.navigateUp()
+                })
             }
         }
-        navigation(startDestination = "home", route = route) {
+        navigation(startDestination = "home", route = "authenticated") {
             composable("home") {
                 HomeRoute()
             }

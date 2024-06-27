@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,25 +20,32 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun LoginRoute() {
+fun LoginRoute(navigateToSignup: () -> Unit) {
     val loginViewModel = hiltViewModel<LoginViewModel>()
-
+    LoginPage(loginViewModel::onLogin, navigateToSignup)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(onLogin: (email: String, password: String) -> Unit) {
+fun LoginPage(onLogin: (email: String, password: String) -> Unit, navigateToSignup: () -> Unit) {
     var emailInput by remember {
         mutableStateOf("")
     }
     var passwordInput by remember {
         mutableStateOf("")
     }
-    Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
+    Scaffold(modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(title = { Text("Login") })
+        }) { padding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -58,6 +68,11 @@ fun LoginPage(onLogin: (email: String, password: String) -> Unit) {
             }) {
                 Text("Login")
             }
+            Spacer(modifier = Modifier.height(12.dp))
+            ClickableText(text = AnnotatedString("Create new Account"), style = TextStyle(textDecoration = TextDecoration.Underline)) {
+                navigateToSignup()
+            }
+
         }
     }
 }
@@ -65,5 +80,5 @@ fun LoginPage(onLogin: (email: String, password: String) -> Unit) {
 @Preview
 @Composable
 private fun LoginPagePreview() {
-    LoginPage { e, p -> }
+    LoginPage({ e, p -> }, {})
 }

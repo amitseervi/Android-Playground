@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.blue.fire.app.navigation.AppNavigation
 import com.blue.fire.app.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,9 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    AppNavigation(modifier=Modifier.padding(innerPadding))
                 }
             }
         }
