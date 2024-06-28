@@ -1,3 +1,18 @@
+/***
+ * Copyright 2024 Amit Seervi
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.blue.fire.authentication.signup
 
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +52,7 @@ fun SignupRoute(navigateUp: () -> Unit) {
 @Composable
 fun SignupPage(
     onSignup: (user: String, email: String, password: String) -> Unit,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
 ) {
     var userName by remember {
         mutableStateOf("")
@@ -48,35 +63,41 @@ fun SignupPage(
     var passwordInput by remember {
         mutableStateOf("")
     }
-    Scaffold(modifier = Modifier.fillMaxSize(),
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(title = { Text("Signup") }, navigationIcon = {
                 IconButton(navigateUp) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                 }
             })
-        }) { padding ->
+        },
+    ) { padding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxSize(),
+            modifier =
+                Modifier
+                    .padding(padding)
+                    .fillMaxSize(),
         ) {
             TextField(
                 userName,
                 onValueChange = { newValue -> userName = newValue },
-                placeholder = { Text("DisplayName") })
+                placeholder = { Text("DisplayName") },
+            )
             Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 emailInput,
                 onValueChange = { newValue -> emailInput = newValue },
-                placeholder = { Text("Email") })
+                placeholder = { Text("Email") },
+            )
             Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 passwordInput,
                 onValueChange = { newValue -> passwordInput = newValue },
-                placeholder = { Text("Password") })
+                placeholder = { Text("Password") },
+            )
             Spacer(modifier = Modifier.height(12.dp))
             Button(onClick = {
                 onSignup(userName, emailInput, passwordInput)

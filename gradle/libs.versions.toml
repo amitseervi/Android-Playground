@@ -44,6 +44,8 @@ uiTextGoogleFonts = "1.6.8"
 uiautomatorVersion = "2.3.0"
 version-catalog-update = "0.8.4"
 workRuntimeKtx = "2.9.0"
+ktlint-version = "11.3.2"
+kotlin-compose-ruleset-version = "12.1.1"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -90,6 +92,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 material = { module = "com.google.android.material:material", version.ref = "material" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
+ktlint-compose-rules = { module = "io.nlopez.compose.rules:ktlint", version.ref = "kotlin-compose-ruleset-version" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -106,3 +109,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-version" }

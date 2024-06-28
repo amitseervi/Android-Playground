@@ -1,3 +1,18 @@
+/***
+ * Copyright 2024 Amit Seervi
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.blue.fire.authentication.login
 
 import androidx.compose.foundation.layout.Arrangement
@@ -35,33 +50,41 @@ fun LoginRoute(navigateToSignup: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(onLogin: (email: String, password: String) -> Unit, navigateToSignup: () -> Unit) {
+fun LoginPage(
+    onLogin: (email: String, password: String) -> Unit,
+    navigateToSignup: () -> Unit,
+) {
     var emailInput by remember {
         mutableStateOf("")
     }
     var passwordInput by remember {
         mutableStateOf("")
     }
-    Scaffold(modifier = Modifier.fillMaxSize(),
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(title = { Text("Login") })
-        }) { padding ->
+        },
+    ) { padding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxSize(),
+            modifier =
+                Modifier
+                    .padding(padding)
+                    .fillMaxSize(),
         ) {
             TextField(
                 emailInput,
                 onValueChange = { newValue -> emailInput = newValue },
-                placeholder = { Text("Email") })
+                placeholder = { Text("Email") },
+            )
             Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 passwordInput,
                 onValueChange = { newValue -> passwordInput = newValue },
-                placeholder = { Text("Password") })
+                placeholder = { Text("Password") },
+            )
             Spacer(modifier = Modifier.height(12.dp))
             Button(onClick = {
                 onLogin(emailInput, passwordInput)
@@ -69,10 +92,12 @@ fun LoginPage(onLogin: (email: String, password: String) -> Unit, navigateToSign
                 Text("Login")
             }
             Spacer(modifier = Modifier.height(12.dp))
-            ClickableText(text = AnnotatedString("Create new Account"), style = TextStyle(textDecoration = TextDecoration.Underline)) {
+            ClickableText(
+                text = AnnotatedString("Create new Account"),
+                style = TextStyle(textDecoration = TextDecoration.Underline),
+            ) {
                 navigateToSignup()
             }
-
         }
     }
 }

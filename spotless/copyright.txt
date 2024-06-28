@@ -1,5 +1,5 @@
 /***
- * Copyright 2024 Amit Seervi
+ * Copyright $YEAR Amit Seervi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.blue.fire.app.navigation
-
-import androidx.lifecycle.ViewModel
-import com.blue.fire.authentication.repository.AuthRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-
-@HiltViewModel
-class AuthenticationViewModel
-    @Inject
-    constructor(
-        private val authRepository: AuthRepository,
-    ) : ViewModel() {
-        val currentUser = authRepository.currentUser
-    }
