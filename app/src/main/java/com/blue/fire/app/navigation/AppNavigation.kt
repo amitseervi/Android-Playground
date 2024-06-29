@@ -22,8 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.blue.fire.authentication.authenticationNavGraph
-import com.blue.fire.home.homeNavGraph
+import com.rignis.authentication.ui.authenticationNavGraph
+import com.rignis.home.ui.homeNavGraph
 
 @Composable
 fun AppNavigation(modifier: Modifier) {

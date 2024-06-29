@@ -24,12 +24,12 @@ plugins {
 
 android {
     namespace = "com.blue.fire.app"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
         applicationId = "com.blue.fire.app"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.compileSdkVersion.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -98,8 +98,7 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.runtime.livedata)
-    implementation(project(":ui:home"))
-    implementation(project(":ui:authentication"))
-    implementation(project(":data:authentication"))
-    implementation(project(":feature:authentication"))
+    implementation(project(":authentication:ui"))
+    implementation(project(":authentication:domain"))
+    implementation(project(":home:ui"))
 }

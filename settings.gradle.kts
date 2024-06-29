@@ -35,10 +35,15 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Playground"
-include(":feature:feed")
-include(":data:feed")
 include(":app")
-include(":feature:authentication")
-include(":data:authentication")
-include(":ui:authentication")
-include(":ui:home")
+include(":authentication:data")
+include(":authentication:ui")
+include(":authentication:domain")
+
+include(":core:data")
+include(":core:domain")
+include(":core:ui")
+
+include(":home:data")
+include(":home:ui")
+include(":home:domain")
