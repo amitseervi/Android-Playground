@@ -70,4 +70,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.runtime.livedata)
     implementation(project(":core:ui"))
+    implementation(project(":home:data"))
+    implementation(project(":home:domain"))
 }
