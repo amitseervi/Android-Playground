@@ -28,6 +28,7 @@ plugins {
     alias(libs.plugins.version.catalog.update)
     alias(libs.plugins.spotless)
     alias(libs.plugins.ktlint)
+    alias(libs.plugins.jetbrains.kotlin.jvm) apply false
 }
 
 apply("${project.rootDir}/buildscripts/toml-updater-config.gradle")

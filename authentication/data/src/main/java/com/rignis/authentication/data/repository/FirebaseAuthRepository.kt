@@ -48,7 +48,7 @@ class FirebaseAuthRepository
             email: String,
             password: String,
         ): User =
-            suspendCoroutine<User> { cont ->
+            suspendCoroutine { cont ->
                 auth
                     .signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener {

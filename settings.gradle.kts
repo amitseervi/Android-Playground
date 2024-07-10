@@ -36,6 +36,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Playground"
 include(":app")
+
 include(":authentication:data")
 include(":authentication:ui")
 include(":authentication:domain")
@@ -47,3 +48,7 @@ include(":core:ui")
 include(":home:data")
 include(":home:ui")
 include(":home:domain")
+
+include(":post:data")
+include(":post:ui")
+include(":post:domain")
