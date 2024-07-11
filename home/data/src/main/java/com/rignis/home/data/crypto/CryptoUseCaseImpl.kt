@@ -1,4 +1,4 @@
-package com.rignis.home.data
+package com.rignis.home.data.crypto
 
 import com.rignis.home.domain.CryptoUseCase
 import javax.inject.Inject

@@ -45,6 +45,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
+    implementation(libs.androidx.work.runtime.ktx)
     api(project(":core:data"))
     implementation(project(":home:domain"))
     implementation(libs.hilt.android)

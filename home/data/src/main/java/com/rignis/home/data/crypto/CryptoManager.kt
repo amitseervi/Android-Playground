@@ -1,4 +1,4 @@
-package com.rignis.home.data
+package com.rignis.home.data.crypto
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties

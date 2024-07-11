@@ -21,6 +21,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.rignis.home.ui.crypto.CryptoRoute
 import com.rignis.home.ui.feed.HomeFeedRoute
+import com.rignis.home.ui.playground.PlayGroundRoute
 
 fun NavGraphBuilder.homeNavGraph(
     route: String,
@@ -30,11 +31,18 @@ fun NavGraphBuilder.homeNavGraph(
         composable("feed") {
             HomeFeedRoute(navigateToCrypto = {
                 navController.navigate("demo-crypto")
+            },navigateToPlayground = {
+                navController.navigate("demo-playground")
             })
         }
 
         composable("demo-crypto") {
             CryptoRoute()
         }
+
+        composable("demo-playground") {
+            PlayGroundRoute()
+        }
+
     }
 }

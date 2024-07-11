@@ -30,13 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun HomeFeedRoute(navigateToCrypto: () -> Unit) {
+fun HomeFeedRoute(navigateToCrypto: () -> Unit, navigateToPlayground: () -> Unit) {
     val homeViewModel = hiltViewModel<HomeViewModel>()
-    HomePage(navigateToCrypto)
+    HomePage(navigateToCrypto, navigateToPlayground)
 }
 
 @Composable
-fun HomePage(navigateToCrypto: () -> Unit) {
+fun HomePage(navigateToCrypto: () -> Unit, navigateToPlayground: () -> Unit) {
     Scaffold { innerPadding ->
         Column(
             modifier = Modifier
@@ -48,6 +48,10 @@ fun HomePage(navigateToCrypto: () -> Unit) {
             Button(navigateToCrypto) {
                 Text("Keystore Crypto")
             }
+
+            Button(navigateToPlayground) {
+                Text("Playground")
+            }
         }
     }
 }
@@ -55,7 +59,9 @@ fun HomePage(navigateToCrypto: () -> Unit) {
 @Preview
 @Composable
 private fun HomePagePreview() {
-    HomePage {
+    HomePage({
 
-    }
+    }, {
+
+    })
 }
